@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE | Subject Ace Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --bg-page: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #1E293B;
+            --text-side: #475569;
+            --border-color: #F1F5F9;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        .dark {
+            --bg-page: #0F172A;
+            --bg-card: #1E293B;
+            --text-main: #F1F5F9;
+            --text-side: #94A3B8;
+            --border-color: #334155;
+            --glass-bg: rgba(15, 23, 42, 0.8);
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-page); color: var(--text-main); transition: background-color 0.3s ease, color 0.3s ease; }
+        .heading-font { font-family: 'Outfit', sans-serif; }
+        .glass { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--border-color); }
+        .card-bg { background-color: var(--bg-card); border-color: var(--border-color); }
+        .text-side { color: var(--text-side); }
+        
+        /* Overrides for Tailwind transition */
+        .dark .bg-white { background-color: var(--bg-card) !important; }
+        .dark .bg-\[\#F8FAFC\] { background-color: var(--bg-page) !important; }
+        .dark .text-\[\#1E293B\] { color: var(--text-main) !important; }
+        .dark .text-gray-900 { color: var(--text-main) !important; }
+        .dark .text-gray-700 { color: var(--text-main) !important; }
+        .dark .border-gray-100 { border-color: var(--border-color) !important; }
+        .dark .bg-gray-50 { background-color: #1e293b80 !important; }
+
+        .perspective-1000 { perspective: 1000px; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .transform-style-3d { transform-style: preserve-3d; }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] min-h-screen flex text-[#1E293B]">
+
+    <!-- Auth Portal & Landing Page -->
+    <div id="auth-portal" class="fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col md:flex-row animate-in fade-in duration-700">
+        
+        <!-- Left: Marketing & Hero -->
+        <div class="md:flex-1 bg-white p-12 lg:p-24 flex flex-col justify-center relative overflow-hidden overflow-y-auto">
+            <!-- Decorative background elements -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
+            <div class="absolute -bottom-24 right-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl opacity-50"></div>
+
+            <div class="relative z-10 max-w-2xl">
+                <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl font-black shadow-xl shadow-blue-200 mb-8">A</div>
+                <h1 class="heading-font text-5xl lg:text-7xl font-extrabold tracking-tight text-[#0F172A] leading-[1.1]">
+                    Master your courses with <span class="text-blue-600">AI Intelligence.</span>
+                </h1>
+                <p class="text-xl text-gray-500 font-medium mt-8 leading-relaxed">
+                    Subject Ace transforms your lecture notes and PDFs into summaries, quizzes, and flashcards instantly. Designed for the modern student at GCTU.
+                </p>
+
+                <!-- Feature Grid -->
+                <div class="grid grid-cols-2 gap-8 mt-16">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-[#1E293B]">AI Summaries</h4>
+                        <p class="text-sm text-gray-400 font-medium leading-relaxed">Condense massive PDFs into clean, digestible study session points.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-[#1E293B]">Smart Quizzes</h4>
+                        <p class="text-sm text-gray-400 font-medium leading-relaxed">Generate 20+ custom questions from your notes to test retention.</p>
+                    </div>
+                </div>
+
+                <!-- Creators Credits -->
+                <div class="mt-20 pt-10 border-t border-gray-100 flex items-center gap-6">
+                    <div>
+                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Developed By</p>
+                        <div class="flex items-center gap-4">
+                            <span class="text-xs font-bold text-[#1E293B]">Leslie Amoako</span>
+                            <div class="w-1 h-1 bg-gray-200 rounded-full"></div>
+                            <span class="text-xs font-bold text-[#1E293B]">Newton Tommy</span>
+                            <div class="w-1 h-1 bg-gray-200 rounded-full"></div>
+                            <span class="text-xs font-bold text-[#1E293B]">Richard Opoku</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Auth Pane -->
+        <div class="md:w-[500px] bg-[#F8FAFC] flex items-center justify-center p-8 lg:p-12 relative">
+            <div class="max-w-md w-full glass rounded-[40px] p-10 shadow-2xl shadow-blue-100 flex flex-col gap-8">
+                <div class="text-center space-y-2">
+                    <h2 class="heading-font text-3xl font-extrabold tracking-tight">Get Started</h2>
+                    <p class="text-gray-400 font-bold text-sm" id="auth-subtitle">Sign in to access your study lab.</p>
+                </div>
+
+                <div id="login-form" class="space-y-6">
+                    <div class="space-y-4">
+                        <input type="email" id="login-email" placeholder="Email Address" class="w-full bg-white border border-gray-100 rounded-2xl px-6 py-4 text-sm font-bold focus:outline-none focus:border-blue-200 transition-all">
+                        <input type="password" id="login-pass" placeholder="Password" class="w-full bg-white border border-gray-100 rounded-2xl px-6 py-4 text-sm font-bold focus:outline-none focus:border-blue-200 transition-all">
+                    </div>
+                    <button onclick="handleLogin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-blue-100 transition-all active:scale-95">Sign In</button>
+                    <p class="text-center text-xs font-bold text-gray-400 uppercase tracking-widest pt-4">Don't have an account? <br> <button onclick="toggleAuth(true)" class="text-blue-600 hover:underline mt-2">Create New Lab</button></p>
+                </div>
+
+                <div id="signup-form" class="hidden space-y-6">
+                    <div class="space-y-4">
+                        <div class="w-full bg-blue-50 p-4 rounded-2xl mb-2">
+                             <p class="text-[10px] font-bold text-blue-600 uppercase tracking-tighter">Student Registration</p>
+                        </div>
+                        <input type="text" id="signup-name" placeholder="Students' Full Name" class="w-full bg-white border border-gray-100 rounded-2xl px-6 py-4 text-sm font-bold focus:outline-none focus:border-blue-200 transition-all">
+                        <input type="email" id="signup-email" placeholder="Institutional Email" class="w-full bg-white border border-gray-100 rounded-2xl px-6 py-4 text-sm font-bold focus:outline-none focus:border-blue-200 transition-all">
+                        <input type="password" id="signup-pass" placeholder="Create Secure Password" class="w-full bg-white border border-gray-100 rounded-2xl px-6 py-4 text-sm font-bold focus:outline-none focus:border-blue-200 transition-all">
+                    </div>
+                    <button onclick="handleSignup()" class="w-full bg-[#1E293B] hover:bg-black text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-blue-50 transition-all active:scale-95">Complete Setup</button>
+                    <p class="text-center text-xs font-bold text-gray-400 uppercase tracking-widest pt-4">Already a member? <br> <button onclick="toggleAuth(false)" class="text-blue-600 hover:underline mt-2">Back to Login</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white border-r border-gray-100 flex flex-col fixed h-full z-20">
+        <div class="p-8 pb-10">
+            <h1 class="heading-font text-2xl font-extrabold tracking-tighter text-blue-600 flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm">A</div>
+                ACE
+            </h1>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-1">
+            <button onclick="setView('dashboard')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all text-blue-600 bg-blue-50" id="nav-dashboard">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                Dashboard
+            </button>
+            <button onclick="setView('summary')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all text-gray-400 hover:text-gray-600 hover:bg-gray-50" id="nav-summary">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                AI Summaries
+            </button>
+            <button onclick="setView('quiz')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all text-gray-400 hover:text-gray-600 hover:bg-gray-50" id="nav-quiz">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                Quiz Generator
+            </button>
+            <button onclick="setView('flashcards')" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm transition-all text-gray-400 hover:text-gray-600 hover:bg-gray-50" id="nav-flashcards">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                Flashcards
+            </button>
+
+            <!-- My Library (Moved Up) -->
+            <div class="px-4 pt-6 space-y-4">
+                <div class="flex items-center justify-between px-4">
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">My Library</p>
+                    <button onclick="promptCreateFolder()" class="text-gray-400 hover:text-blue-600 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                </div>
+                <div class="space-y-1" id="folders-list">
+                    <!-- Dynamic folders injected here -->
+                </div>
+            </div>
+            
+            <!-- User Profile & Logout -->
+            <div class="px-8 py-8 border-t border-gray-50 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold" id="user-initials">U</div>
+                    <div class="overflow-hidden">
+                        <p class="text-xs font-black text-gray-700 truncate" id="user-display-name">User Name</p>
+                        <p class="text-[10px] font-bold text-gray-400">Student Account</p>
+                    </div>
+                </div>
+                <button onclick="handleLogout()" class="text-gray-300 hover:text-red-500 transition-colors tooltip" title="Logout">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </button>
+            </div>
+        </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-72 flex flex-col">
+        
+        <!-- TopBar -->
+        <header class="h-20 bg-white/80 backdrop-blur-md px-10 flex items-center justify-between sticky top-0 z-10 border-b border-gray-100">
+            <div class="flex-1 max-w-xl relative">
+                <svg class="w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" id="search-input" placeholder="Search your materials..." class="w-full bg-gray-50 border border-gray-100 rounded-xl py-2.5 pl-14 pr-6 text-sm font-medium focus:outline-none focus:border-blue-200 transition-all">
+            </div>
+
+            <div class="flex items-center gap-4 pl-6 border-l border-gray-100 ml-6">
+                <!-- Dark Mode Toggle -->
+                <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-all border border-transparent hover:border-blue-100" id="dark-mode-toggle">
+                    <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </button>
+
+                <div class="text-right">
+                    <p class="text-[13px] font-bold text-gray-900 leading-none" id="header-user-name">User Name</p>
+                </div>
+                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold text-sm border-2 border-white shadow-sm uppercase" id="header-user-initials">UN</div>
+            </div>
+        </header>
+
+        <!-- Dynamic Views -->
+        <section id="content-area" class="p-10 flex-1">
+            
+            <!-- Dashboard View -->
+            <div id="view-dashboard" class="space-y-10">
+                <!-- Breadcrumbs -->
+                <div id="breadcrumbs" class="flex items-center gap-2 mb-4 animate-in fade-in duration-500">
+                    <!-- Dynamic crumbs injected here -->
+                </div>
+
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-4xl font-extrabold heading-font tracking-tight text-[#0F172A]" id="view-title">Dashboard</h2>
+                        <p class="text-gray-400 font-bold text-sm mt-1" id="view-subtitle">Organize and master your study materials with AI.</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <button onclick="promptCreateFolder()" class="bg-blue-50 text-blue-600 px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all hover:bg-blue-100 active:scale-95 border border-blue-100">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            New Folder
+                        </button>
+                        
+                        <div class="flex items-center gap-4 bg-white p-2 pl-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">To:</span>
+                                <select id="upload-folder-select" class="text-sm font-bold text-gray-700 bg-transparent border-none focus:ring-0 cursor-pointer">
+                                    <option value="root">Library Root</option>
+                                    <!-- Folders injected here -->
+                                </select>
+                            </div>
+                            <div class="h-6 w-px bg-gray-100"></div>
+                            <div class="relative">
+                                <input type="file" id="file-input" class="absolute inset-0 opacity-0 cursor-pointer" accept=".pdf,.docx,.pptx">
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all shadow-md shadow-blue-100 active:scale-95">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                    Upload
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="flex justify-start">
+                    <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-center gap-5 min-w-[300px]">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Generated Guides</p>
+                            <p class="text-2xl font-extrabold heading-font" id="stat-count">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid -->
+                <div class="grid grid-cols-3 gap-6 pb-20" id="guides-grid">
+                    <!-- Cards injected here -->
+                </div>
+            </div>
+
+            <!-- Generic List View (for Summary/Quiz/Flashcards Selection) -->
+            <div id="view-list" class="hidden space-y-10">
+                <!-- Breadcrumbs for Tools -->
+                <div id="breadcrumbs-tools" class="flex items-center gap-2 mb-4 animate-in fade-in duration-500">
+                    <!-- Dynamic crumbs injected here -->
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-extrabold heading-font tracking-tight text-[#0F172A]" id="view-title-tools">Tool Name</h2>
+                    <p class="text-gray-400 font-bold text-sm mt-1" id="view-subtitle-tools">Select a document to begin.</p>
+                </div>
+                <div class="grid grid-cols-3 gap-6 pb-20" id="list-grid">
+                    <!-- Cards injected here -->
+                </div>
+            </div>
+
+            <!-- Focused Tool Detail View -->
+            <div id="view-tool-detail" class="hidden flex-col gap-8 animate-in slide-in-from-bottom-4 duration-500">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <button onclick="backToToolList()" class="flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-blue-600 transition-all group">
+                            <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                            </div>
+                            Back to Selection
+                        </button>
+
+                        <button onclick="downloadAsPdf()" id="export-pdf-btn" class="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-xs font-black hover:bg-blue-100 transition-all active:scale-95">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path></svg>
+                            Export PDF
+                        </button>
+                    </div>
+                    <div class="text-right">
+                        <h2 class="text-2xl font-extrabold heading-font text-[#0F172A]" id="tool-doc-title">Document Name</h2>
+                        <p class="text-blue-600 font-bold text-[10px] uppercase tracking-widest" id="tool-active-name">Summary</p>
+                    </div>
+                </div>
+
+                <div id="tool-content-area" class="pb-20">
+                    <!-- Immersive Tool content (Summary scroll, Quiz grid, Card UI) injected here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Side Study Drawer -->
+    <div id="study-drawer" class="fixed inset-0 z-[100] bg-black/5 backdrop-blur-[2px] hidden justify-end items-end">
+        <div class="w-full max-w-xl bg-white h-screen shadow-2xl flex flex-col relative animate-drawer">
+            <!-- Close btn -->
+            <button onclick="closeDrawer()" class="absolute left-[-50px] top-10 bg-white p-3 rounded-l-2xl shadow-lg border-l border-t border-b border-gray-100 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <div class="p-10 flex-1 flex flex-col gap-8 overflow-y-auto">
+                <div class="space-y-1">
+                    <h3 class="heading-font text-2xl font-extrabold tracking-tight">Study Assistant</h3>
+                    <p class="text-blue-600 font-bold text-sm truncate" id="active-doc-title">Document Title</p>
+                </div>
+
+                <!-- Drawer Tabs -->
+                <div class="flex bg-gray-50 p-1.5 rounded-2xl border border-gray-100">
+                    <button onclick="setTab('chat')" id="tab-chat" class="tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all bg-white text-gray-900 shadow-sm">Chat</button>
+                    <button onclick="setTab('summary')" id="tab-summary" class="tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-gray-600">Summary</button>
+                    <button onclick="setTab('quiz')" id="tab-quiz" class="tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-gray-600">Quiz</button>
+                    <button onclick="setTab('flashcards')" id="tab-flashcards" class="tab-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-gray-600">Cards</button>
+                </div>
+
+                <!-- Panel Content -->
+                <div id="panel-content" class="flex-1">
+                    <!-- Dynamic content injected here -->
+                </div>
+            </div>
+
+            <!-- Chat Bar (Pinned to bottom) -->
+            <div id="chat-input-container" class="p-10 pt-0">
+                <div class="flex items-center gap-2 bg-gray-50 rounded-2xl p-2 border border-gray-100 shadow-inner">
+                    <input type="text" id="chat-input" placeholder="Ask a question about this doc..." class="flex-1 bg-transparent px-4 py-3 outline-none text-sm font-medium">
+                    <button id="send-btn" class="bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 active:scale-95">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="global-loader" class="fixed inset-0 z-[200] bg-white/60 backdrop-blur-md hidden flex flex-col items-center justify-center">
+        <div class="w-14 h-14 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin mb-4"></div>
+        <p class="heading-font text-lg font-extrabold text-[#1E293B]">AI is thinking...</p>
+        <p class="text-sm text-gray-400 font-medium">Processing your study materials</p>
+    </div>
+
+    <script src="app.js"></script>
+    <style>
+        @keyframes drawer { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        .animate-drawer { animation: drawer 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</body>
+</html>

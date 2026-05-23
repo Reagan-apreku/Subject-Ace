@@ -2,7 +2,7 @@
   "name": "ace-study-generator",
   "version": "1.0.0",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "18.x"
   },
   "description": "AI-powered study guide generator from lecture slides and PDFs",
   "main": "server.js",

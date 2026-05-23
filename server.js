@@ -26,8 +26,7 @@ app.use(express.static('public'));
 
 // Gemini AI Config
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'YOUR_GEMINI_API_KEY');
-// Updated to Gemini 2.5 Flash as per your authorized model list
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Helper to extract text from files
 async function extractText(file) {

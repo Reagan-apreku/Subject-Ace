@@ -28,6 +28,48 @@ app.use(express.static('public'));
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'YOUR_GEMINI_API_KEY');
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
+// Groq Fallback Config
+const GROQ_API_KEY = process.env.GROQ_API_KEY || '';
+
+// Unified AI function: tries Gemini first, falls back to Groq
+async function generateAI(prompt) {
+    // Try Gemini first
+    try {
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        return response.text();
+    } catch (geminiError) {
+        console.log('Gemini failed, trying Groq fallback...', geminiError.message);
+    }
+
+    // Fallback to Groq
+    if (!GROQ_API_KEY) {
+        throw new Error('Both Gemini and Groq are unavailable. Please check your API keys.');
+    }
+
+    const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${GROQ_API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            model: 'llama-3.1-8b-instant',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.7,
+            max_tokens: 4096
+        })
+    });
+
+    if (!groqRes.ok) {
+        const err = await groqRes.text();
+        throw new Error(`Groq API error: ${err}`);
+    }
+
+    const groqData = await groqRes.json();
+    return groqData.choices[0].message.content;
+}
+
 // Helper to extract text from files
 async function extractText(file) {
     const ext = path.extname(file.originalname).toLowerCase();
@@ -131,9 +173,8 @@ app.post('/api/ask', async (req, res) => {
         const context = `DOCUMENT SUMMARY:\n${guide.summary}\n\n`;
         const prompt = `You are a helpful study assistant. Answer the student's question based on the document summary provided below.\n\n${context}\n\nUSER QUESTION: ${question}`;
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        res.json({ answer: response.text() });
+        const answer = await generateAI(prompt);
+        res.json({ answer });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -206,12 +247,11 @@ app.post('/api/generate', upload.single('file'), async (req, res) => {
         
         const prompt = `${systemInstruction}\n\nTEXT:\n${text}`;
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
+        const aiText = await generateAI(prompt);
         let aiData;
         
         try {
-            const cleanText = response.text().replace(/```json|```/g, '').trim();
+            const cleanText = aiText.replace(/```json|```/g, '').trim();
             aiData = JSON.parse(cleanText);
         } catch (parseError) {
             return res.status(500).json({ error: 'AI response error. Please try again.' });
